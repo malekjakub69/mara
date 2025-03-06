@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Histogram Viewer</title>
+        <!-- Chart.js knihovna pro vykreslení grafu -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- Zoom plugin pro Chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1"></script>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <h1>Histogram Viewer</h1>
+
+        <div class="main-container">
+            <!-- Control Panel (vlevo na desktopu) -->
+            <div class="control-panel">
+                <div class="status" id="status">Waiting for data...</div>
+
+                <div class="config-section">
+                    <h3>Configuration</h3>
+                    <div class="config-controls">
+                        <div class="config-item">
+                            <label for="startValue">Start Value</label>
+                            <input type="number" id="startValue" value="0" step="0.01" />
+                        </div>
+                        <div class="config-item">
+                            <label for="stopValue">Stop Value</label>
+                            <input type="number" id="stopValue" value="25" step="0.01" />
+                        </div>
+                        <div class="config-item">
+                            <label for="stepValue">Step Value</label>
+                            <input type="number" id="stepValue" value="0.2" min="0.01" step="0.01" />
+                        </div>
+                        <div class="config-item">
+                            <label for="countPeriod">Update Period (s)</label>
+                            <input class="config-input" type="number" id="countPeriod" value="1" min="1" />
+                        </div>
+                    </div>
+                    <button id="configBtn">Apply Configuration</button>
+                </div>
+
+                <div class="transform-section">
+                    <h3>X-Axis Transformation</h3>
+                    <div class="config-item transform-input">
+                        <label for="xAxisFunction"
+                            >X-Axis Function (use 'x' as variable, e.g. "x * 2" or "Math.log(x)")</label
+                        >
+                        <input type="text" id="xAxisFunction" value="x" placeholder="e.g. x * 2 or Math.log(x)" />
+                    </div>
+                    <div class="config-item">
+                        <label for="functionLabel">Function Label (for axis title)</label>
+                        <input type="text" id="functionLabel" value="Value" placeholder="e.g. Log(Value)" />
+                    </div>
+                    <button id="applyTransformBtn">Apply Transformation</button>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="startBtn">Start</button>
+                    <button id="stopBtn" disabled>Stop</button>
+                    <button id="clearBtn">Clear Data</button>
+                    <button id="exportBtn">Export to CSV</button>
+                </div>
+            </div>
+
+            <!-- Graf (vpravo na desktopu) -->
+            <div class="chart-panel">
+                <div class="chart-container">
+                    <canvas id="histogramChart"></canvas>
+                    <button id="resetZoomBtn">Reset Zoom</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
